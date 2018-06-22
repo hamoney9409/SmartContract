@@ -288,10 +288,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        118,
-                        119
+                        61,
+                        62
                       ],
-                      "referencedDeclaration": 118,
+                      "referencedDeclaration": 61,
                       "src": "156:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -374,7 +374,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 115,
+                        "referencedDeclaration": 58,
                         "src": "215:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -850,10 +850,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        118,
-                        119
+                        61,
+                        62
                       ],
-                      "referencedDeclaration": 118,
+                      "referencedDeclaration": 61,
                       "src": "156:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -936,7 +936,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 115,
+                        "referencedDeclaration": 58,
                         "src": "215:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -1197,5 +1197,5 @@
     }
   },
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-06-22T08:32:41.367Z"
+  "updatedAt": "2018-06-22T08:50:16.767Z"
 }
