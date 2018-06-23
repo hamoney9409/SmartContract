@@ -19,7 +19,7 @@ App = {
 //				petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
 //
 //				petsRow.append(petTemplate.html());
-			}
+//			}
 		}
 	);
 
@@ -91,7 +91,7 @@ markAdopted: function(adopters, account) {
 
 	handleAdopt: function(event) {
 		event.preventDefault();
-
+		console.log("handleAdopt 호출");
 		var petId = parseInt($(event.target).data('id'));
 		var adoptionInstance;
 
