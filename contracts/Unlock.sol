@@ -1,6 +1,6 @@
 pragma solidity ^0.4.17;
 
-contract Adoption {
+contract Unlock {
 
 address[16] public adopters;
 
