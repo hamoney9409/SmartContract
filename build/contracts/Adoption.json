@@ -288,10 +288,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        61,
-                        62
+                        118,
+                        119
                       ],
-                      "referencedDeclaration": 61,
+                      "referencedDeclaration": 118,
                       "src": "156:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -374,7 +374,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 58,
+                        "referencedDeclaration": 115,
                         "src": "215:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -850,10 +850,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        61,
-                        62
+                        118,
+                        119
                       ],
-                      "referencedDeclaration": 61,
+                      "referencedDeclaration": 118,
                       "src": "156:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -936,7 +936,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 58,
+                        "referencedDeclaration": 115,
                         "src": "215:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -1192,10 +1192,10 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xa18cd3fe86df2f77705b5d5cc65cdba66d8d39fe",
-      "transactionHash": "0x66c9542b142ecf403cc9ae2191578fc76e0e308e3fddd17c171ec149d74d9e8d"
+      "address": "0x7b34c56c7a1a9ca61a9b645981d2e1c7d2a8ac42",
+      "transactionHash": "0xa8373ed971a54df539877b0cdd242afa4d2684a92984fc9d17fe6a7af0daac84"
     }
   },
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-06-22T08:50:16.767Z"
+  "updatedAt": "2018-06-23T02:05:50.621Z"
 }
