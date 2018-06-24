@@ -1,129 +1,110 @@
 App = {
-	web3Provider: null,
-	contracts: {},
+  web3Provider: null,
+  contracts: {},
 
-	init: function() {
-		// Load pets.
-		$.getJSON(
-			'../pets.json', function(data) 
-			{
-				
-//				var petsRow = $('#petsRow');
-//				var petTemplate = $('#petTemplate');
-//
-//				for (i = 0; i < data.length; i ++) {
-//					petTemplate.find('.panel-title').text(data[i].name);
-//					petTemplate.find('img').attr('src', data[i].picture);
-//					petTemplate.find('.pet-breed').text(data[i].breed);
-//					petTemplate.find('.pet-age').text(data[i].age);
-//					petTemplate.find('.pet-location').text(data[i].location);
-//					petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
-//
-//					petsRow.append(petTemplate.html());
-//				}
-			}
-		);
+  init: function() {
+    // Load pets.
+    $.getJSON('../pets.json', function(data) {
+      var petsRow = $('#petsRow');
+      var petTemplate = $('#petTemplate');
 
-		return App.initWeb3();
-	},
+      for (i = 0; i < data.length; i ++) {
+        petTemplate.find('.panel-title').text(data[i].name);
+        petTemplate.find('img').attr('src', data[i].picture);
+        petTemplate.find('.pet-breed').text(data[i].breed);
+        petTemplate.find('.pet-age').text(data[i].age);
+        petTemplate.find('.pet-location').text(data[i].location);
+        petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
 
-	initWeb3: function() {
+        petsRow.append(petTemplate.html());
+      }
+    });
 
-		// Is there an injected web3 instance?
-		if (typeof web3 !== 'undefined') {
-			App.web3Provider = web3.currentProvider;
-		} else {
-			// If no injected web3 instance is detected, fall back to Ganache
-			App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
-		}
-		web3 = new Web3(App.web3Provider);
+    return App.initWeb3();
+  },
 
-		return App.initContract();
-	},
+  initWeb3: function() {
 
-	initContract: function() {
+// Is there an injected web3 instance?
+if (typeof web3 !== 'undefined') {
+  App.web3Provider = web3.currentProvider;
+} else {
+  // If no injected web3 instance is detected, fall back to Ganache
+  App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+}
+web3 = new Web3(App.web3Provider);
 
-		$.getJSON(
-			'Unlock.json', function(data) {
-				// Get the necessary contract artifact file and instantiate it with truffle-contract
-				var artifact = data;
-				App.contracts.Unlock = TruffleContract(artifact);
+    return App.initContract();
+  },
 
-				// Set the provider for our contract
-				App.contracts.Unlock.setProvider(App.web3Provider);
+  initContract: function() {
 
-				// Use our contract to retrieve and mark the adopted pets
-				return App.markAdopted();
-			}
-		);
+$.getJSON('Unlock.json', function(data) {
+  // Get the necessary contract artifact file and instantiate it with truffle-contract
+  var UnlockArtifact = data;
+  App.contracts.Unlock = TruffleContract(UnlockArtifact);
 
-		return App.bindEvents();
-	},
+  // Set the provider for our contract
+  App.contracts.Unlock.setProvider(App.web3Provider);
 
-	bindEvents: function() {
-		$(document).on('click', '.btn-adopt', App.handleAdopt);
-	},
+  // Use our contract to retrieve and mark the adopted pets
+  return App.markAdopted();
+});
 
-	markAdopted: function(adopters, account) {
-		var adoptionInstance;
-		App.contracts.Unlock.deployed().then(
-			function(instance) 
-			{
-				adoptionInstance = instance;
+    return App.bindEvents();
+  },
 
-				return adoptionInstance.getAdopters.call();
-			}
-		).then(
-			function(adopters) 
-			{
-				for (i = 0; i < adopters.length; i++) {
-					if (adopters[i] !== '0x0000000000000000000000000000000000000000') {
-						$('.panel-pet').eq(i).find('button').text('Success').attr('disabled', true);
-					}
-				}
-			}
-		).catch(
-			function(err) {
-				console.log(err.message);
-			}
-		);
+  bindEvents: function() {
+    $(document).on('click', '.btn-adopt', App.handleAdopt);
+  },
 
-	},
+  markAdopted: function(adopters, account) {
 
-	handleAdopt: function(event) {
-		event.preventDefault();
-		console.log("handleAdopt 호출");
-		var petId = parseInt($(event.target).data('id'));
-		var adoptionInstance;
+var adoptionInstance;
 
-		web3.eth.getAccounts(
-			function(error, accounts) {
-				if (error) {
-					console.log(error);
-				}
+App.contracts.Unlock.deployed().then(function(instance) {
+  adoptionInstance = instance;
 
-				var account = accounts[0];
+  return adoptionInstance.getAdopters.call();
+}).then(function(adopters) {
+  for (i = 0; i < adopters.length; i++) {
+    if (adopters[i] !== '0x0000000000000000000000000000000000000000') {
+      $('.panel-pet').eq(i).find('button').text('Success').attr('disabled', true);
+    }
+  }
+}).catch(function(err) {
+  console.log(err.message);
+});
 
-				App.contracts.Unlock.deployed().then(
-						function(instance) {
-						adoptionInstance = instance;
+  },
 
-						// Execute adopt as a transaction by sending account
-						return adoptionInstance.adopt(petId, {from: account});
-					}
-				).then(
-					function(result) {
-						return App.markAdopted();
-					}
-				).catch(
-					function(err) {
-						console.log(err.message);
-					}
-				);
-			}
-		);
+  handleAdopt: function(event) {
+    event.preventDefault();
 
-	}
+    var petId = parseInt($(event.target).data('id'));
+
+var adoptionInstance;
+
+web3.eth.getAccounts(function(error, accounts) {
+  if (error) {
+    console.log(error);
+  }
+
+  var account = accounts[0];
+
+  App.contracts.Unlock.deployed().then(function(instance) {
+    adoptionInstance = instance;
+
+    // Execute adopt as a transaction by sending account
+    return adoptionInstance.adopt(petId, {from: account});
+  }).then(function(result) {
+    return App.markAdopted();
+  }).catch(function(err) {
+    console.log(err.message);
+  });
+});
+
+  }
 
 };
 
